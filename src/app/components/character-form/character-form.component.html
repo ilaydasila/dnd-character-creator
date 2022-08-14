@@ -1,0 +1,39 @@
+<div class="wrapper">
+    <form *ngIf="!characterImageFormSuccess" [formGroup]="characterImageForm" (ngSubmit)="onCharacterImageSubmit()">
+        <select formControlName="gender" #genderSelect (change)='onGenderSelected(genderSelect.value)'>
+          <option *ngFor="let gender of genders">
+            {{ gender }}
+          </option>
+        </select>
+        <select formControlName="race" #raceSelect (change)='onRaceSelected(raceSelect.value)'>
+          <option *ngFor="let race of races">
+            {{ race }}
+          </option>
+        </select>     
+        <select formControlName="class" #classSelect (change)='onClassSelected(classSelect.value)'>
+          <option *ngFor="let class of classes">
+            {{ class }}
+          </option>
+        </select>
+        <button class="button" type="submit">Continue</button>
+      </form>
+
+      <form *ngIf="characterImageFormSuccess && !characterPersonalInfoFormSuccess" [formGroup]="characterPersonalInfoForm" (ngSubmit)="onCharacterPersonalInfoSubmit()">
+        <legend>Personal</legend>
+        <label>
+          <label>Name</label>
+          <Input type='text' name='name'/>
+        </label>
+        <label>
+          <label>Surname</label>
+          <Input type='text' name='surname'/>
+        </label>
+        <label>
+          <label>Age</label>
+          <Input type='number' name='age' min='14' required />
+        </label>
+        <Button class="button" type='submit'>Save and Continue</Button>
+    </form>
+    
+      <dnd-character-image [path]="path"></dnd-character-image>
+</div>
